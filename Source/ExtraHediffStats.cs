@@ -107,24 +107,24 @@ namespace XenobionicPatcher {
             );
 
             // Note: In v1.6, `<causesNeed>` has been removed. Non-drug needs are now listed as `<enablesNeeds>` in the `HediffStage`
-            if (hediff.stages.Any(s => s.enablesNeeds.Any())) yield return new StatDrawEntry(
+            if (hediff.stages?.FirstOrDefault(s => s.enablesNeeds != null) != null) yield return new StatDrawEntry(
                 category: category,
-                label: "Stat_Hediff_EnablesNeeds_Name".Translate(),
-                reportText: "Stat_Hediff_EnablesNeeds_Desc".Translate(),
+                label: "CreatesNeed".Translate(),
+                reportText: "Stat_Hediff_CausesNeed_Desc".Translate(),
                 // Now need to grab the list of needs from any `<HediffStage>` that has them
-                valueString: GenText.ToCommaList(hediff.stages.Where(s => s.enablesNeeds.Any()).SelectMany(nd => nd.enablesNeeds.Select(dn => dn.LabelCap.ToString()))),
-                hyperlinks: hediff.stages.Where(s => s.enablesNeeds.Any()).SelectMany(nd => nd.enablesNeeds.Select(dn => new Dialog_InfoCard.Hyperlink(dn)).ToArray()),
+                valueString: GenText.ToCommaList(hediff.stages.Where(s => s.enablesNeeds != null).SelectMany(nd => nd.enablesNeeds.Select(dn => dn.LabelCap.ToString())).Distinct()),
+                hyperlinks: hediff.stages.Where(s => s.enablesNeeds != null).SelectMany(nd => nd.enablesNeeds.Select(dn => new Dialog_InfoCard.Hyperlink(dn)).ToArray()),
                 displayPriorityWithinCategory: 4930
             );
             
             // Note: In v1.6, `<disablesNeeds>` has been moved to `HediffStage` 
-            if (hediff.stages.Any(s => s.disablesNeeds.Any())) yield return new StatDrawEntry(
+            if (hediff.stages?.FirstOrDefault(s => s.disablesNeeds != null) != null) yield return new StatDrawEntry(
                 category:    category,
                 label:       "Stat_Hediff_DisablesNeeds_Name".Translate(),
                 reportText:  "Stat_Hediff_DisablesNeeds_Desc".Translate(),
                 // Now need to grab the list of needs from any `<HediffStage>` that has them
-                valueString: GenText.ToCommaList( hediff.stages.Where(s => s.disablesNeeds.Any()).SelectMany(nd => nd.disablesNeeds.Select(dn => dn.LabelCap.ToString()) )),
-                hyperlinks:  hediff.stages.Where(s => s.disablesNeeds.Any()).SelectMany(nd => nd.disablesNeeds.Select(dn => new Dialog_InfoCard.Hyperlink(dn)).ToArray()),
+                valueString: GenText.ToCommaList( hediff.stages.Where(s => s.disablesNeeds != null).SelectMany(nd => nd.disablesNeeds.Select(dn => dn.LabelCap.ToString()) ).Distinct()),
+                hyperlinks:  hediff.stages.Where(s => s.disablesNeeds != null).SelectMany(nd => nd.disablesNeeds.Select(dn => new Dialog_InfoCard.Hyperlink(dn)).ToArray()),
                 displayPriorityWithinCategory: 4930
             );
 
