@@ -107,7 +107,7 @@ namespace XenobionicPatcher {
             );
 
             // Note: In v1.6, `<causesNeed>` has been removed. Non-drug needs are now listed as `<enablesNeeds>` in the `HediffStage`
-            if (!hediff.stages.Any(s => s.enablesNeeds.Any())) yield return new StatDrawEntry(
+            if (hediff.stages.Any(s => s.enablesNeeds.Any())) yield return new StatDrawEntry(
                 category: category,
                 label: "Stat_Hediff_EnablesNeeds_Name".Translate(),
                 reportText: "Stat_Hediff_EnablesNeeds_Desc".Translate(),
@@ -118,7 +118,7 @@ namespace XenobionicPatcher {
             );
             
             // Note: In v1.6, `<disablesNeeds>` has been moved to `HediffStage` 
-            if (!hediff.stages.Any(s => s.disablesNeeds.Any())) yield return new StatDrawEntry(
+            if (hediff.stages.Any(s => s.disablesNeeds.Any())) yield return new StatDrawEntry(
                 category:    category,
                 label:       "Stat_Hediff_DisablesNeeds_Name".Translate(),
                 reportText:  "Stat_Hediff_DisablesNeeds_Desc".Translate(),
