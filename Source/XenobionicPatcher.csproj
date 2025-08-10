@@ -14,7 +14,7 @@
     <Configuration>Debug</Configuration>
     <Platform>AnyCPU</Platform>
 
-    <OutputPath>..\1.5\Assemblies\</OutputPath>
+    <OutputPath>..\1.6\Assemblies\</OutputPath>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <FileAlignment>512</FileAlignment>
